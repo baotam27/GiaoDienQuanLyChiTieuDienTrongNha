@@ -1,58 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+================================================================================
+          HỆ THỐNG IOT GIÁM SAT VÀ BẢO VỆ ĐIỆN TỦ CHÍNH GIA ĐÌNH
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+--------------------------------------------------------------------------------
+1. TÍNH NĂNG CỐT LÕI HỆ THỐNG
+--------------------------------------------------------------------------------
 
-## About Laravel
+1.1. Dashboard Tổng Quan Thời Gian Thực
+- Giám sát thông số thời gian thực: Hiển thị liên tục các chỉ số điện năng từ tủ
+  điện chính bao gồm: Điện áp (U - Volt), Dòng điện (I - Ampere), Công suất (P - Watt)
+  và Tiền điện tạm tính (VNĐ).
+- Biểu đồ sóng Realtime: Trực quan hóa diễn biến biến thiên công suất thời gian thực
+  bằng thư viện Chart.js.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1.2. Quản Lý Tài Chính & Định Mức Ngân Sách Thông Minh
+- Tính tiền điện 6 bậc EVN: Áp dụng công thức tính giá điện sinh hoạt 6 bậc thang
+  hiện hành của EVN (bao gồm 8% thuế VAT).
+- Phân bổ ngân sách động cho các ngày còn lại: Tự động giữ nguyên số tiền điện
+  đã chi tiêu của các ngày đã qua và chia đều phần hạn mức còn lại cho các ngày
+  còn lại trong tháng.
+- Bắt lỗi & Ràng buộc an toàn ngân sách: Bật Pop-up cảnh báo khẩn cấp khi:
+  + Ngân sách cài đặt thấp hơn số tiền điện thực tế đã chi tiêu.
+  + Ngân sách trung bình các ngày còn lại quá thấp (< 5 kWh/ngày hoặc < 10.000 VNĐ/ngày).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1.3. Phân Tích Lịch Sử Tiêu Thụ Đa Chu Kỳ (Ngày & Tháng)
+- Báo cáo chi tiết theo Ngày: Hiển thị trực tiếp điện năng (kWh) và chi phí (VNĐ)
+  của từng ngày mà không cần thao tác rê chuột.
+- Đánh giá tiêu dùng thực tế: Tính toán mức tiêu thụ trung bình/ngày thực tế dựa trên
+  các ngày đã trôi qua, tự động gắn nhãn CAO HƠN TB (kèm số tiền vượt) hoặc THẤP HƠN TB.
+- Báo cáo Lịch sử Tháng: Lưu vết và so sánh sản lượng/chi phí của các tháng trước đó.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1.4. An Toàn Tủ Điện & Cảnh Báo Âm Thanh
+- Tự động ngắt Rơ-le bảo vệ: Khi xảy ra sự cố Sụt áp (U < 180V) hoặc Quá áp (U > 240V),
+  hệ thống lập tức phát lệnh ngắt Rơ-le tổng (I -> 0A, P -> 0W) để bảo vệ toàn bộ
+  thiết bị điện trong nhà.
+- Còi báo động dồn dập (Siren Loop): Phát chuỗi âm thanh báo động lặp lại liên tục
+  sau mỗi 0.5 giây thông qua Web Audio API khi có sự cố quá tải hoặc điện áp bất thường.
+- Nhật ký sự cố (Audit Logs): Ghi vết chi tiết lịch sử đóng/ngắt Rơ-le và các cảnh báo
+  khẩn cấp theo thời gian thực.
 
-## Learning Laravel
+1.5. Giả Lập Tương Tác & Nạp/Xuất File Dữ Liệu
+- Thử nghiệm kịch bản khẩn cấp: Cung cấp các nút kích hoạt nhanh các kịch bản:
+  Tải thường (900W), Quá tải (3600W), Sụt áp (165V), Quá áp (255V).
+- Nạp File JSON Dữ Liệu: Cho phép Import trực tiếp file .json giả lập cấu trúc
+  dữ liệu telemetry từ thiết bị cứng.
+- Xuất báo cáo: Cho phép Export lịch sử dữ liệu ra file .json hoặc file bảng tính .csv.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-## Agentic Development
+--------------------------------------------------------------------------------
+2. HƯỚNG DẪN CÀI ĐẶT VÀ CHẠY DỰ ÁN
+--------------------------------------------------------------------------------
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+2.1. Yêu cầu môi trường:
+- PHP: >= 8.2
+- Composer: phiên bản mới nhất
+- Môi trường web: Laragon / XAMPP / WampServer
 
-```bash
-composer require laravel/boost --dev
+2.2. Các bước khởi chạy dự án:
 
-php artisan boost:install
-```
+Bước 1: Mở Terminal tại thư mục project
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Bước 2: Cài đặt các thư viện phụ thuộc (Dependencies)
+   composer install
 
-## Contributing
+Bước 3: Cấu hình file môi trường .env
+   Sao chép file .env.example thành .env (nếu chưa có):
+   cp .env.example .env
+   
+   Mở file .env và tạo Key ứng dụng:
+   php artisan key:generate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Bước 4: Xóa sạch bộ nhớ Cache
+   php artisan config:clear
+   php artisan route:clear
+   php artisan view:clear
+   php artisan cache:clear
 
-## Code of Conduct
+Bước 5: Khởi chạy Server Laravel
+   php artisan serve
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Bước 6: Truy cập ứng dụng
+   Mở trình duyệt web và truy cập vào đường dẫn:
+   http://127.0.0.1:8000
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
