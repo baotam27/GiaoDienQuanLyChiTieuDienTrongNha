@@ -1,0 +1,25 @@
+{
+  "device_info": {
+    "device_id": "MAIN_PANEL_01",
+    "location": "Tủ điện chính căn hộ"
+  },
+  "current_status": {
+    "voltage": 220.5,
+    "current": 4.12,
+    "power": 908.0,
+    "energy": 215.4,
+    "relay_state": true,
+    "is_overload": false
+  },
+  "daily_records": [
+    { "date": "2026-08-01", "energy_kwh": 6.8, "cost_vnd": 16500 },
+    { "date": "2026-08-02", "energy_kwh": 9.2, "cost_vnd": 22400 },
+    { "date": "2026-08-03", "energy_kwh": 5.4, "cost_vnd": 13100 },
+    { "date": "2026-08-04", "energy_kwh": 7.1, "cost_vnd": 17200 }
+  ],
+  "monthly_records": [
+    { "month": "05/2026", "energy_kwh": 185.2, "cost_vnd": 435000 },
+    { "month": "06/2026", "energy_kwh": 210.8, "cost_vnd": 512000 },
+    { "month": "07/2026", "energy_kwh": 195.4, "cost_vnd": 468000 }
+  ]
+}
